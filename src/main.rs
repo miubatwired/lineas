@@ -22,8 +22,7 @@ fn main() -> glib::ExitCode{
 
 fn build_ui(app: &Application){
     //Load the user interface
-    let ui_src = include_str!("resources/window.ui");
-    let builder = gtk::Builder::from_string(ui_src);
+    let builder = gtk::Builder::from_resource("/org/manzana/lineas/window.ui");
     let window = builder
         .object::<gtk::Window>("window")
         .expect("Couldn't get window");
