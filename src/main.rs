@@ -20,15 +20,18 @@ fn main() -> glib::ExitCode{
     app.run()
 }
 
+//Creates the user interface
 fn build_ui(app: &Application){
-    //Load the user interface
+    //Load the user interface from resources and creates the gtk builder
     let builder = gtk::Builder::from_resource("/org/manzana/lineas/window.ui");
+    //Creates the window of the app
     let window = builder
         .object::<gtk::Window>("window")
         .expect("Couldn't get window");
+    //Creates the button to open the file
     let button = builder
         .object::<gtk::Button>("button1")
-        .expect("Couldn't get button");git
+        .expect("Couldn't get button");
     window.set_application(Some(app));
     let window_clone = window.clone();
     button.connect_clicked(move |_| {
@@ -64,8 +67,11 @@ fn build_ui(app: &Application){
     window.present();
 }
 
+///Returns an unsigned integer of 32 bits with the number of lines
+///#Arguments
+///
+///* file - a gtk gio file from a FileDialog
 fn read_num_lines(file : gtk::gio::File) -> u32 {
-     /*Counts the number of lines in that file */
     let filename = file.path().expect("No se pudo obtener la ruta");
     let file = File::open(&filename).expect("No se pudo obtener el archivo");
     let file = BufReader::new(file);
