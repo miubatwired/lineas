@@ -28,10 +28,7 @@ fn build_ui(app: &Application){
         .expect("Couldn't get window");
     let button = builder
         .object::<gtk::Button>("button1")
-        .expect("Couldn't get button");
-    let texto = builder
-        .object::<gtk::Label>("texto")
-        .expect("Couldn't get label");
+        .expect("Couldn't get button");git
     window.set_application(Some(app));
     let window_clone = window.clone();
     button.connect_clicked(move |_| {
