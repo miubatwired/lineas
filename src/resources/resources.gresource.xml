@@ -2,5 +2,6 @@
 <gresources>
   <gresource prefix="/org/manzana/lineas/">
     <file compressed="true" preprocess="xml-stripblanks">window.ui</file>
+    <file compressed="true">kirby.png</file>
   </gresource>
 </gresources>
