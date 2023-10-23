@@ -3,12 +3,25 @@
   <menu id="app-menu">
     <section>
       <item>
+        <attribute name="label">Acerca de</attribute>
+        <attribute name="action">app.about</attribute>
+      </item>
+      <item>
         <attribute name="label">Cerrar</attribute>
         <attribute name="action">window.close</attribute>
       </item>
     </section>
   </menu>
-  <object class="GtkWindow" id="window">
+  <object class="GtkAboutDialog" id="about">
+    <property name="authors">Dana &lt;kyokatsukirayla@gmail.com&gt;</property>
+    <property name="modal">True</property>
+    <property name="program-name">Líneas</property>
+    <property name="version">1.0</property>
+    <property name="license-type">gpl-3-0</property>
+    <property name="comments">A simple program that shows the number of lines in a text file</property>
+    <property name="logo">kirby.png</property>
+  </object>
+  <object class="GtkApplicationWindow" id="window">
     <property name="width-request">360</property>
     <property name="title">Líneas</property>
     <property name="resizable">False</property>
