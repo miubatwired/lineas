@@ -2,6 +2,7 @@ use gtk::prelude::*;
 use gtk::{gio, glib, Application};
 use std::fs::File;
 use std::io::{BufRead, BufReader};
+use crate::glib::clone;
 
 const APP_ID: &str = "org.manzana.lineas";
 fn main() -> glib::ExitCode{
@@ -26,7 +27,7 @@ fn build_ui(app: &Application){
     let builder = gtk::Builder::from_resource("/org/manzana/lineas/window.ui");
     //Creates the window of the app
     let window = builder
-        .object::<gtk::Window>("window")
+        .object::<gtk::ApplicationWindow>("window")
         .expect("Couldn't get window");
     //Creates the button to open the file
     let button = builder
@@ -63,6 +64,18 @@ fn build_ui(app: &Application){
             }
         });
     });
+    /*Create an action named about to show the about dialog */
+    let action_about = gio::SimpleAction::new("about", None);
+    action_about.connect_activate(clone!(@weak window => move |_, _| {
+        let builder = gtk::Builder::from_resource("/org/manzana/lineas/window.ui");
+        let about_dialog = builder
+            .object::<gtk::AboutDialog>("about")
+            .expect("Couldn't get about Dialog");
+        about_dialog.set_transient_for(Some(&window));
+        about_dialog.present();
+    }));
+    /*Add the action to the app*/
+    app.add_action(&action_about);
     //Present window
     window.present();
 }
